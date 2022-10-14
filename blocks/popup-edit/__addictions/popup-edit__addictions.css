@@ -1,0 +1,20 @@
+.popup-edit__addictions {
+  width: 358px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  margin-bottom: 48px;
+  border: none;
+  border-bottom: 1px solid #000000;
+  padding: 0;
+}
+
+@media screen and (max-width: 599px) {
+  .popup-edit__addictions {
+    max-width: 238px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 45px;
+  }
+}

@@ -1,0 +1,18 @@
+.popup-edit__content {
+  margin: 195px auto 0;
+  width: 430px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media screen and (max-width: 599px) {
+  .popup-edit__content {
+    margin-top: 123px;
+    width: 282px;
+    height: 322px;
+  }
+}

@@ -1,0 +1,16 @@
+.post__like-icon {
+  margin-top: 30px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  background-image: url(../../../images/like-icon.svg);
+  border: none;
+  width: 22px;
+  height: 19;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.post__like-icon:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
