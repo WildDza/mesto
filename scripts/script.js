@@ -1,5 +1,5 @@
-let showPopup = document.querySelector(".profile__edit-icon");
 let hidePopup = document.querySelector(".popup-edit__close-icon");
+let showPopup = document.querySelector(".profile__edit-icon");
 let saveAndHidePopup = document.querySelector(".popup-edit__button-save");
 let popup = document.querySelector(".popup-edit");
 let formElement = document.querySelector(".popup-edit__content-container");
