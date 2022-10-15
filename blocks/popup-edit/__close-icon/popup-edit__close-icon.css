@@ -2,7 +2,7 @@
   position: absolute;
   text-align: center;
   background-image: url(../../../images/close-icon.svg);
-  background-color: #000;
+  background-color: initial;
   border: none;
   background-repeat: no-repeat;
   background-position: 50%;

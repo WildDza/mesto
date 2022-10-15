@@ -9,8 +9,19 @@
   padding: 0;
 }
 
+.popup-edit__input:nth-child(3) {
+  margin-top: 30px;
+  margin-bottom: 48px;
+}
+
 @media screen and (max-width: 599px) {
   .popup-edit__input {
     max-width: 238px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .popup-edit__input:nth-child(3) {
+    margin-bottom: 45px;
   }
 }
