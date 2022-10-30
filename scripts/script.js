@@ -1,6 +1,6 @@
-let editPopup = document.querySelector(".popup__edit");
-let addPostPopup = document.querySelector(".popup__add-post");
-let imagePopup = document.querySelector(".popup__open-image");
+let editPopup = document.querySelector(".popup_edit");
+let addPostPopup = document.querySelector(".popup_add-post");
+let imagePopup = document.querySelector(".popup_open-image");
 
 let closeEditPopupIcon = editPopup.querySelector(".popup__close-icon");
 let closeAddPostPopupIcon = addPostPopup.querySelector(".popup__close-icon");
