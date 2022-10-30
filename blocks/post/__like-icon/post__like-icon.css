@@ -8,6 +8,7 @@
   height: 19;
   background-repeat: no-repeat;
   background-color: #fff;
+  transition: 0.3s linear 0.05s;
 }
 
 .post__like-icon:hover {

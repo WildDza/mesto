@@ -8,6 +8,7 @@
   border: 1px solid #fff;
   background-repeat: no-repeat;
   background-position: 50%;
+  transition: opacity 0.3s linear 0.05s;
 }
 
 .profile__edit-icon:hover {

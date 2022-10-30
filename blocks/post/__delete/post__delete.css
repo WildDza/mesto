@@ -1,0 +1,13 @@
+.post__delete {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 19px;
+  transition: 0.3s linear 0.05s;
+}
+
+.post__delete:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
