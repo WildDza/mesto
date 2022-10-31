@@ -39,16 +39,25 @@ function emptyValuePostsPopup() {
   imgUrlInput.reset;
 }
 
+function openPopup(popup) {
+  popup.classList.add("popup_show");
+}
+
+function closePopup(popup) {
+  popup.classList.remove("popup_show");
+}
+
 function openEditPopup() {
-  popupEdit.classList.add("popup_show");
+  openPopup(popupEdit);
   saveValueUserPopup();
 }
+
 function openAddPostPopup() {
-  popupAddPost.classList.add("popup_show");
+  openPopup(popupAddPost);
   emptyValuePostsPopup();
 }
 function openImgPopup(event) {
-  popupImage.classList.add("popup_show");
+  openPopup(popupImage);
   const target = event.target;
   imgInPopup.src = target.src;
   imgInPopup.alt = target.alt;
@@ -56,15 +65,15 @@ function openImgPopup(event) {
 }
 
 function closeEditPopup() {
-  popupEdit.classList.remove("popup_show");
+  closePopup(popupEdit);
 }
 
 function closeAddPostPopup() {
-  popupAddPost.classList.remove("popup_show");
+  closePopup(popupAddPost);
 }
 
 function closeImgPopup() {
-  popupImage.classList.remove("popup_show");
+  closePopup(popupImage);
 }
 
 function transferValueToUserInfo() {
