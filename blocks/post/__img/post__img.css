@@ -5,4 +5,5 @@
   border-top-right-radius: 10px;
   position: relative;
   object-fit: cover;
+  cursor: pointer;
 }
