@@ -1,37 +1,37 @@
-const editPopup = document.querySelector(".popup_edit");
-const addPostPopup = document.querySelector(".popup_add-post");
-const imagePopup = document.querySelector(".popup_open-image");
+const popupEdit = document.querySelector(".popup_edit");
+const popupAddPost = document.querySelector(".popup_add-post");
+const popupImage = document.querySelector(".popup_open-image");
 
-const closeEditPopupIcon = editPopup.querySelector(".popup__close-icon");
-const closeAddPostPopupIcon = addPostPopup.querySelector(".popup__close-icon");
-const closeImagePopupIcon = imagePopup.querySelector(".popup__close-icon");
+const popupEditCloseIcon = popupEdit.querySelector(".popup__close-icon");
+const popupAddPostCloseIcon = popupAddPost.querySelector(".popup__close-icon");
+const popupImgCloseIcon = popupImage.querySelector(".popup__close-icon");
 
-const editDataIcon = document.querySelector(".profile__edit-icon");
-const addPostIcon = document.querySelector(".profile__add-button");
-const imageForOpenPopup = document.querySelector(".post__img");
+const iconDataEdit = document.querySelector(".profile__edit-icon");
+const iconPostAdd = document.querySelector(".profile__add-button");
+const imgPost = document.querySelector(".post__img");
 
-const saveAndHidePopupButton = document.querySelector(".popup__button-save");
+const buttonSaveInPopup = document.querySelector(".popup__button-save");
 
-const editForm = editPopup.querySelector(".popup__form-edit");
-const addPostForm = addPostPopup.querySelector(".popup__form-add-post");
+const formEditUserData = popupEdit.querySelector(".popup__form-edit");
+const formAddPostData = popupAddPost.querySelector(".popup__form-add-post");
 
-const nameInput = document.querySelector(".popup__input_name-area");
-const jobInput = document.querySelector(".popup__input_addictions");
+const userNameInput = document.querySelector(".popup__input_name-area");
+const userJobInput = document.querySelector(".popup__input_addictions");
 const imgNameInput = document.querySelector(".popup__input_name-img");
 const imgUrlInput = document.querySelector(".popup__input_url-img");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-const imgName = document.querySelector(".post__title");
-const imgNameInPopup = document.querySelector(".popup__image-title");
+const titleProfile = document.querySelector(".profile__title");
+const subtitleProfile = document.querySelector(".profile__subtitle");
+const titlePost = document.querySelector(".post__title");
+const titleImgInPopup = document.querySelector(".popup__image-title");
 const imgInPopup = document.querySelector(".popup__image");
-const postsContainer = document.querySelector(".posts");
+const containerPosts = document.querySelector(".posts");
 const postTemplate = document.querySelector("#post-template").content;
 
 const initialCards = cards;
 
 function savedValueUserPopup() {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
+  userNameInput.value = titleProfile.textContent;
+  userJobInput.value = subtitleProfile.textContent;
 }
 
 function emptyValuePostsPopup() {
@@ -40,49 +40,49 @@ function emptyValuePostsPopup() {
 }
 
 function openEditPopup() {
-  editPopup.classList.add("popup_show");
+  popupEdit.classList.add("popup_show");
   savedValueUserPopup();
 }
 function openAddPostPopup() {
-  addPostPopup.classList.add("popup_show");
+  popupAddPost.classList.add("popup_show");
   emptyValuePostsPopup();
 }
 function openImgPopup(event) {
-  imagePopup.classList.add("popup_show");
+  popupImage.classList.add("popup_show");
   const target = event.target;
   imgInPopup.src = target.src;
   imgInPopup.alt = target.alt;
-  imgNameInPopup.textContent = target.alt;
+  titleImgInPopup.textContent = target.alt;
 }
 
 function closeEditPopup() {
-  editPopup.classList.remove("popup_show");
+  popupEdit.classList.remove("popup_show");
 }
 
 function closeAddPostPopup() {
-  addPostPopup.classList.remove("popup_show");
+  popupAddPost.classList.remove("popup_show");
 }
 
 function closeImgPopup() {
-  imagePopup.classList.remove("popup_show");
+  popupImage.classList.remove("popup_show");
 }
 
 function valueToUserInfo() {
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
+  titleProfile.textContent = userNameInput.value;
+  subtitleProfile.textContent = userJobInput.value;
 }
 
 const setEventListener = (postElement) => {
-  const deletePostBtn = postElement.querySelector(".post__delete");
-  deletePostBtn.addEventListener("click", deletePost);
-  const openImage = postElement.querySelector(".post__img");
-  openImage.addEventListener("click", openImgPopup);
+  const buttonDeletePost = postElement.querySelector(".post__delete");
+  buttonDeletePost.addEventListener("click", deletePost);
+  const imgOpenPopup = postElement.querySelector(".post__img");
+  imgOpenPopup.addEventListener("click", openImgPopup);
 };
 
 const deletePost = (event) => {
   const target = event.target;
-  const currentPostItemElement = target.closest(".post");
-  currentPostItemElement.remove();
+  const postCurrent = target.closest(".post");
+  postCurrent.remove();
 };
 
 const addPosts = (nameValue, linkValue) => {
@@ -100,7 +100,7 @@ const addPosts = (nameValue, linkValue) => {
 
   setEventListener(postElement);
 
-  postsContainer.prepend(postElement);
+  containerPosts.prepend(postElement);
 };
 
 initialCards.forEach(function (element) {
@@ -118,31 +118,31 @@ initialCards.forEach(function (element) {
 
   setEventListener(postElement);
 
-  postsContainer.prepend(postElement);
+  containerPosts.prepend(postElement);
 });
 
-editForm.addEventListener("submit", (event) => {
+formEditUserData.addEventListener("submit", (event) => {
   event.preventDefault();
   valueToUserInfo();
-  editPopup.classList.remove("popup_show");
+  popupEdit.classList.remove("popup_show");
 });
 
-addPostForm.addEventListener("submit", (event) => {
+formAddPostData.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const imgName = document.querySelector(".popup__input_name-img");
-  const imgLink = document.querySelector(".popup__input_url-img");
+  const nameImg = document.querySelector(".popup__input_name-img");
+  const linkImg = document.querySelector(".popup__input_url-img");
 
-  addPosts(imgName.value, imgLink.value);
-  imgName.value = "";
-  imgLink.value = "";
+  addPosts(nameImg.value, linkImg.value);
+  nameImg.value = "";
+  linkImg.value = "";
 
-  addPostPopup.classList.remove("popup_show");
+  popupAddPost.classList.remove("popup_show");
 });
 
-editDataIcon.addEventListener("click", openEditPopup);
-addPostIcon.addEventListener("click", openAddPostPopup);
+iconDataEdit.addEventListener("click", openEditPopup);
+iconPostAdd.addEventListener("click", openAddPostPopup);
 
-closeEditPopupIcon.addEventListener("click", closeEditPopup);
-closeAddPostPopupIcon.addEventListener("click", closeAddPostPopup);
-closeImagePopupIcon.addEventListener("click", closeImgPopup);
+popupEditCloseIcon.addEventListener("click", closeEditPopup);
+popupAddPostCloseIcon.addEventListener("click", closeAddPostPopup);
+popupImgCloseIcon.addEventListener("click", closeImgPopup);
