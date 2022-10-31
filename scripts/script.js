@@ -35,8 +35,8 @@ function saveValueUserPopup() {
 }
 
 function emptyValuePostsPopup() {
-  imgNameInput.value = "";
-  imgUrlInput.value = "";
+  imgNameInput.reset;
+  imgUrlInput.reset;
 }
 
 function openEditPopup() {
@@ -134,8 +134,8 @@ formAddPostData.addEventListener("submit", (event) => {
   const linkImg = document.querySelector(".popup__input_url-img");
 
   addPosts(nameImg.value, linkImg.value);
-  nameImg.value = "";
-  linkImg.value = "";
+  nameImg.reset;
+  linkImg.reset;
 
   popupAddPost.classList.remove("popup_show");
 });
