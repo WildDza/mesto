@@ -88,11 +88,15 @@ const setEventListener = (postElement) => {
   imgOpenPopup.addEventListener("click", openImgPopup);
 };
 
+//удаление поста
+
 const deletePost = (event) => {
   const target = event.target;
   const postCurrent = target.closest(".post");
   postCurrent.remove();
 };
+
+//добавление поста пользователем
 
 const addPosts = (nameValue, linkValue) => {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
@@ -111,6 +115,8 @@ const addPosts = (nameValue, linkValue) => {
 
   containerPosts.prepend(postElement);
 };
+
+//добавление постов из массива
 
 initialCards.forEach(function (element) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
@@ -133,7 +139,7 @@ initialCards.forEach(function (element) {
 formEditUserData.addEventListener("submit", (event) => {
   event.preventDefault();
   transferValueToUserInfo();
-  popupEdit.classList.remove("popup_show");
+  closePopup(popupEdit);
 });
 
 formAddPostData.addEventListener("submit", (event) => {
@@ -146,7 +152,7 @@ formAddPostData.addEventListener("submit", (event) => {
   nameImg.reset;
   linkImg.reset;
 
-  popupAddPost.classList.remove("popup_show");
+  closePopup(popupAddPost);
 });
 
 iconDataEdit.addEventListener("click", openEditPopup);
