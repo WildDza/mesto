@@ -29,7 +29,7 @@ const postTemplate = document.querySelector("#post-template").content;
 
 const initialCards = cards;
 
-function savedValueUserPopup() {
+function saveValueUserPopup() {
   userNameInput.value = titleProfile.textContent;
   userJobInput.value = subtitleProfile.textContent;
 }
@@ -41,7 +41,7 @@ function emptyValuePostsPopup() {
 
 function openEditPopup() {
   popupEdit.classList.add("popup_show");
-  savedValueUserPopup();
+  saveValueUserPopup();
 }
 function openAddPostPopup() {
   popupAddPost.classList.add("popup_show");
@@ -67,7 +67,7 @@ function closeImgPopup() {
   popupImage.classList.remove("popup_show");
 }
 
-function valueToUserInfo() {
+function transferValueToUserInfo() {
   titleProfile.textContent = userNameInput.value;
   subtitleProfile.textContent = userJobInput.value;
 }
@@ -123,7 +123,7 @@ initialCards.forEach(function (element) {
 
 formEditUserData.addEventListener("submit", (event) => {
   event.preventDefault();
-  valueToUserInfo();
+  transferValueToUserInfo();
   popupEdit.classList.remove("popup_show");
 });
 
