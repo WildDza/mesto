@@ -24,6 +24,10 @@ const subtitleProfile = document.querySelector(".profile__subtitle");
 const titlePost = document.querySelector(".post__title");
 const titleImgInPopup = document.querySelector(".popup__image-title");
 const imgInPopup = document.querySelector(".popup__image");
+
+const nameImg = document.querySelector(".popup__input_name-img");
+const linkImg = document.querySelector(".popup__input_url-img");
+
 const containerPosts = document.querySelector(".posts");
 const postTemplate = document.querySelector("#post-template").content;
 
@@ -142,11 +146,10 @@ formEditUserData.addEventListener("submit", (event) => {
   closePopup(popupEdit);
 });
 
+//форма добавления поста пользователем
+
 formAddPostData.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  const nameImg = document.querySelector(".popup__input_name-img");
-  const linkImg = document.querySelector(".popup__input_url-img");
 
   addPosts(nameImg.value, linkImg.value);
   nameImg.reset;
