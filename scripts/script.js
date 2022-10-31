@@ -1,31 +1,31 @@
-let editPopup = document.querySelector(".popup_edit");
-let addPostPopup = document.querySelector(".popup_add-post");
-let imagePopup = document.querySelector(".popup_open-image");
+const editPopup = document.querySelector(".popup_edit");
+const addPostPopup = document.querySelector(".popup_add-post");
+const imagePopup = document.querySelector(".popup_open-image");
 
-let closeEditPopupIcon = editPopup.querySelector(".popup__close-icon");
-let closeAddPostPopupIcon = addPostPopup.querySelector(".popup__close-icon");
-let closeImagePopupIcon = imagePopup.querySelector(".popup__close-icon");
+const closeEditPopupIcon = editPopup.querySelector(".popup__close-icon");
+const closeAddPostPopupIcon = addPostPopup.querySelector(".popup__close-icon");
+const closeImagePopupIcon = imagePopup.querySelector(".popup__close-icon");
 
-let editDataIcon = document.querySelector(".profile__edit-icon");
-let addPostIcon = document.querySelector(".profile__add-button");
-let imageForOpenPopup = document.querySelector(".post__img");
+const editDataIcon = document.querySelector(".profile__edit-icon");
+const addPostIcon = document.querySelector(".profile__add-button");
+const imageForOpenPopup = document.querySelector(".post__img");
 
-let saveAndHidePopupButton = document.querySelector(".popup__button-save");
+const saveAndHidePopupButton = document.querySelector(".popup__button-save");
 
-let editForm = editPopup.querySelector(".popup__form-edit");
-let addPostForm = addPostPopup.querySelector(".popup__form-add-post");
+const editForm = editPopup.querySelector(".popup__form-edit");
+const addPostForm = addPostPopup.querySelector(".popup__form-add-post");
 
-let nameInput = document.querySelector(".popup__input_name-area");
-let jobInput = document.querySelector(".popup__input_addictions");
-let imgNameInput = document.querySelector(".popup__input_name-img");
-let imgUrlInput = document.querySelector(".popup__input_url-img");
-let profileTitle = document.querySelector(".profile__title");
-let profileSubtitle = document.querySelector(".profile__subtitle");
-let imgName = document.querySelector(".post__title");
-let imgNameInPopup = document.querySelector(".popup__image-title");
-let imgInPopup = document.querySelector(".popup__image");
-let postsContainer = document.querySelector(".posts");
-let postTemplate = document.querySelector("#post-template").content;
+const nameInput = document.querySelector(".popup__input_name-area");
+const jobInput = document.querySelector(".popup__input_addictions");
+const imgNameInput = document.querySelector(".popup__input_name-img");
+const imgUrlInput = document.querySelector(".popup__input_url-img");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
+const imgName = document.querySelector(".post__title");
+const imgNameInPopup = document.querySelector(".popup__image-title");
+const imgInPopup = document.querySelector(".popup__image");
+const postsContainer = document.querySelector(".posts");
+const postTemplate = document.querySelector("#post-template").content;
 
 const initialCards = cards;
 
