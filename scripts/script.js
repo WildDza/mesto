@@ -31,7 +31,7 @@ function saveValueUserPopup() {
   userJobInput.value = subtitleProfile.textContent;
 }
 
-function emptyValuePostsPopup() {
+function resetValuePostsPopup() {
   imgNameInput.reset;
   imgUrlInput.reset;
 }
@@ -51,7 +51,7 @@ function openEditPopup() {
 
 function openAddPostPopup() {
   openPopup(popupAddPost);
-  emptyValuePostsPopup();
+  resetValuePostsPopup();
 }
 function openImgPopup(event) {
   openPopup(popupImage);
@@ -73,14 +73,14 @@ function closeImgPopup() {
   closePopup(popupImage);
 }
 
-function transferValueToUserInfo() {
+function getValueToUserInfo() {
   titleProfile.textContent = userNameInput.value;
   subtitleProfile.textContent = userJobInput.value;
 }
 
 function handleEditUserSubmit(event) {
   event.preventDefault();
-  transferValueToUserInfo();
+  getValueToUserInfo();
   closePopup(popupEdit);
 }
 
