@@ -1,6 +1,7 @@
 const popupEdit = document.querySelector(".popup_edit");
 const popupAddPost = document.querySelector(".popup_add-post");
 const popupImage = document.querySelector(".popup_open-image");
+const popupShow = document.querySelector(".popup_show");
 const popupEditCloseIcon = popupEdit.querySelector(".popup__close-icon");
 const popupAddPostCloseIcon = popupAddPost.querySelector(".popup__close-icon");
 const popupImgCloseIcon = popupImage.querySelector(".popup__close-icon");
@@ -31,6 +32,11 @@ function saveValueUserPopup() {
   userJobInput.value = subtitleProfile.textContent;
 }
 
+function resetCardValue() {
+  nameImg.value = "";
+  linkImg.value = "";
+}
+
 function resetValuePostsPopup() {
   imgNameInput.reset;
   imgUrlInput.reset;
@@ -38,20 +44,26 @@ function resetValuePostsPopup() {
 
 function openPopup(popup) {
   popup.classList.add("popup_show");
+  document.addEventListener("keydown", handleClosePopupEsc);
+  popup.addEventListener("click", handleOverlayClosePopup);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_show");
+  document.removeEventListener("keydown", handleClosePopupEsc);
+  popup.removeEventListener("click", handleOverlayClosePopup);
 }
 
 function openEditPopup() {
   openPopup(popupEdit);
   saveValueUserPopup();
+  enableValidation();
 }
 
 function openAddPostPopup() {
   openPopup(popupAddPost);
   resetValuePostsPopup();
+  enableValidation();
 }
 function openImgPopup(event) {
   openPopup(popupImage);
@@ -63,10 +75,13 @@ function openImgPopup(event) {
 
 function closeEditPopup() {
   closePopup(popupEdit);
+  resetValidate();
 }
 
 function closeAddPostPopup() {
   closePopup(popupAddPost);
+  resetValidate();
+  resetCardValue();
 }
 
 function closeImgPopup() {
@@ -87,9 +102,21 @@ function handleEditUserSubmit(event) {
 function handleAddPostSubmit(event) {
   event.preventDefault();
   renderPost({ name: nameImg.value, link: linkImg.value });
-  nameImg.value = "";
-  linkImg.value = "";
+  resetCardValue();
   closePopup(popupAddPost);
+}
+
+function handleClosePopupEsc(event) {
+  if (event.key === "Escape") {
+    const delElement = document.querySelector(".popup_show");
+    closePopup(delElement);
+  }
+}
+
+function handleOverlayClosePopup(element) {
+  if (element.target === element.currentTarget) {
+    closePopup(element.target);
+  }
 }
 
 const setEventListener = (postElement) => {
@@ -127,11 +154,11 @@ const renderPost = (post) => {
 initialCards.forEach(renderPost);
 
 formEditUserData.addEventListener("submit", handleEditUserSubmit);
-
 formAddPostData.addEventListener("submit", handleAddPostSubmit);
 
 iconDataEdit.addEventListener("click", openEditPopup);
 iconPostAdd.addEventListener("click", openAddPostPopup);
+
 popupEditCloseIcon.addEventListener("click", closeEditPopup);
 popupAddPostCloseIcon.addEventListener("click", closeAddPostPopup);
 popupImgCloseIcon.addEventListener("click", closeImgPopup);

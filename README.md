@@ -2,9 +2,11 @@
 
 Сервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
-Для 5 ПР использовался макет из Фигмы - https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1 .
+Для 4 ПР использовался макет из Фигмы - https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1 .
 
-Для 6 ПР использовался макет из Фигмы - https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=50160%3A559 .
+Для 5 ПР использовался макет из Фигмы - https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=50160%3A559 .
+
+Для 6 ПР Использовался макет ошибок из Фигмы - https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1 .
 
 Для разработки были использованы: HTML, CSS, JS, BEM.
 
@@ -15,5 +17,7 @@
 На время прохождения 5 спринта реализована возможность корректировать поля с именем и с "делом жизни".
 
 Во время 6 спринта реализована возможность добавлять/удалять посты с картинками, ставить лайки, просматривать фотографии постов.
+
+Во время 7 спринта реализована валидация форм, активность кнопки в зависимости от валидации, закрытие попапа по клику на overlay и по нажатию "Esc".
 
 Проект доступен по адресу - https://wilddza.github.io/mesto/ .
