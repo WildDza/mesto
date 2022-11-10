@@ -39,16 +39,11 @@ const setEventListeners = (formElement, settings) => {
     formElement.querySelectorAll(settings.popupInput)
   );
   const buttonElement = formElement.querySelector(settings.submitButton);
-  toggleButtonState(inputList, buttonElement, settings);
-
-  // добавлен↓
   formElement.addEventListener("reset", () => {
     setTimeout(() => {
       toggleButtonState(inputList, buttonElement, settings);
     }, 0);
   });
-  //↑
-
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, settings);

@@ -1,21 +1,15 @@
 const popupEdit = document.querySelector(".popup_edit");
 const popupAddPost = document.querySelector(".popup_add-post");
 const popupImage = document.querySelector(".popup_open-image");
-const popupShow = document.querySelector(".popup_show");
 const popupCloseIcon = document.querySelectorAll(".popup__close-icon");
 const iconDataEdit = document.querySelector(".profile__edit-icon");
 const iconPostAdd = document.querySelector(".profile__add-button");
-const imgPost = document.querySelector(".post__img");
-const buttonSaveInPopup = document.querySelector(".popup__button-save");
-const formEditUserData = popupEdit.querySelector(".popup__form-edit");
-const formAddPostData = popupAddPost.querySelector(".popup__form-add-post");
+const formEditUserData = document.forms["profile-form"];
+const formAddPostData = document.forms["card-form"];
 const userNameInput = document.querySelector(".popup__input_name-area");
 const userJobInput = document.querySelector(".popup__input_addictions");
-const imgNameInput = document.querySelector(".popup__input_name-img");
-const imgUrlInput = document.querySelector(".popup__input_url-img");
 const titleProfile = document.querySelector(".profile__title");
 const subtitleProfile = document.querySelector(".profile__subtitle");
-const titlePost = document.querySelector(".post__title");
 const titleImgInPopup = document.querySelector(".popup__image-title");
 const imgInPopup = document.querySelector(".popup__image");
 const nameImg = document.querySelector(".popup__input_name-img");
@@ -52,12 +46,11 @@ function openAddPostPopup() {
   openPopup(popupAddPost);
   resetValidate();
 }
-function openImgPopup(event) {
+function openImgPopup(src, alt) {
   openPopup(popupImage);
-  const target = event.target;
-  imgInPopup.src = target.src;
-  imgInPopup.alt = target.alt;
-  titleImgInPopup.textContent = target.alt;
+  imgInPopup.src = src;
+  imgInPopup.alt = alt;
+  titleImgInPopup.textContent = alt;
 }
 
 function closeEditPopup() {
@@ -106,8 +99,12 @@ function handleOverlayClosePopup(element) {
 const setEventListener = (postElement) => {
   const buttonDeletePost = postElement.querySelector(".post__delete");
   buttonDeletePost.addEventListener("click", deletePost);
+
   const imgOpenPopup = postElement.querySelector(".post__img");
-  imgOpenPopup.addEventListener("click", openImgPopup);
+  imgOpenPopup.addEventListener("click", () =>
+    openImgPopup(imgOpenPopup.src, imgOpenPopup.alt)
+  );
+
   const iconLike = postElement.querySelector(".post__like-icon");
   iconLike.addEventListener("click", function (evt) {
     evt.target.classList.toggle("post__like-icon_active");
