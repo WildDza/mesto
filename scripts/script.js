@@ -39,13 +39,13 @@ function closePopup(popup) {
 function openEditPopup() {
   openPopup(popupEdit);
   saveValueUserPopup();
-  resetValidate();
+  resetValidation(popupEdit);
 }
 
 function openAddPostPopup() {
   openPopup(popupAddPost);
-  resetValidate();
 }
+
 function openImgPopup(src, alt) {
   openPopup(popupImage);
   imgInPopup.src = src;

@@ -39,6 +39,7 @@ const setEventListeners = (formElement, settings) => {
     formElement.querySelectorAll(settings.popupInput)
   );
   const buttonElement = formElement.querySelector(settings.submitButton);
+  toggleButtonState(inputList, buttonElement, settings);
   formElement.addEventListener("reset", () => {
     setTimeout(() => {
       toggleButtonState(inputList, buttonElement, settings);
@@ -63,20 +64,13 @@ const resetValidation = (formElement) => {
   });
 };
 
-const enableValidation = () => {
+const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.popupForm));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
     setEventListeners(formElement, settings);
-  });
-};
-
-const resetValidate = () => {
-  const formList = Array.from(document.querySelectorAll(settings.popupForm));
-  formList.forEach((formElement) => {
-    resetValidation(formElement);
   });
 };
 
