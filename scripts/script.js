@@ -40,7 +40,7 @@ const initialCards = [
   },
   {
     name: "Nissan GTR 2000 Skyline Bosozoku",
-    link: "https://66.media.tumblr.com/a7484d0bbf0b2fe1e2dbc95509b063c1/tumblr_p32u7yGYBZ1ubc1ibo1_1280.jpg",
+    link: "https://cdnb.artstation.com/p/assets/images/images/042/245/217/medium/rostislav-prokop-bosozoku-3751.jpg?1633979390",
   },
   {
     name: "Ваз 2101",
