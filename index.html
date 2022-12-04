@@ -1,96 +1,119 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Проект "Mesto"</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
-  <title>Проект "Mesto"</title>
-</head>
+  <body class="root">
+    <div class="page">
+      <header class="header">
+        <img class="header__logo" src="./images/logo.svg" alt="логотип 'Mesto'" />
+      </header>
+      <main class="content">
+        <section class="profile" aria-label="Профиль">
+          <img class="profile__img" src="./images/Kusto.jpg" alt="Изображение Жак-ив Кусто" />
+          <div class="profile__info">
+            <h1 class="profile__title">Крутой дед</h1>
+            <button class="profile__edit-icon" type="button"></button>
+            <p class="profile__subtitle">И немного стиля</p>
+          </div>
+          <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="posts" aria-label="Посты"></section>
+      </main>
+      <footer class="footer">
+        <p>&#169;2022 Mesto Russia</p>
+      </footer>
+    </div>
 
-<body class="root">
-  <div class="page">
-    <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="логотип 'Mesto'">
-    </header>
-    <main class="content">
-      <section class="profile" aria-label="Профиль">
-        <img class="profile__img" src="./images/Kusto.jpg" alt="Изображение Жак-ив Кусто">
-        <div class="profile__info">
-          <h1 class="profile__title">Крутой дед</h1>
-          <button class="profile__edit-icon" type="button"></button>
-          <p class="profile__subtitle">И немного стиля</p>
+    <template id="post-template">
+      <article class="post">
+        <img class="post__img" src="#" alt="" />
+        <img class="post__delete" src="./images/Trash.svg" alt="иконка удаления поста" />
+        <div class="post__info">
+          <h2 class="post__title" name=""></h2>
+          <button class="post__like-icon" type="button"></button>
         </div>
-        <button class="profile__add-button" type="button"></button>
-      </section>
-      <section class="posts" aria-label="Посты"></section>
-    </main>
-    <footer class="footer">
-      <p>&#169;2022 Mesto Russia</p>
-    </footer>
-  </div>
+      </article>
+    </template>
 
-
-  <template id="post-template">
-    <article class="post">
-      <img class="post__img" src="#" alt="">
-      <img class="post__delete" src="./images/Trash.svg" alt="иконка удаления поста">
-      <div class="post__info">
-        <h2 class="post__title" name=""></h2>
-        <button class="post__like-icon" type="button"></button>
-      </div>
-    </article>
-  </template>
-
-
-  <div class="popup popup_edit">
-    <fieldset class="popup__content">
-      <button class="popup__close-icon" type="button"></button>
-      <form class="popup__content-container popup__form-edit" name="profile-form" novalidate>
-        <h2 class="popup__title">
-          Редактировать профиль
-        </h2>
-        <input class="popup__input popup__input_name-area" type="text" name="name" id="userName-input" value="" placeholder="Ваше имя" minlength="2" maxlength="40" required>
-        <span class="popup__input-error userName-input-error"></span>
-        <input class="popup__input popup__input_type_about popup__input_addictions" type="text" name="aboutPerson" id="userAddictions-input"
-          value="" placeholder="Чем Вы занимаетесь?" minlength="2" maxlength="200" required>
+    <div class="popup popup_edit">
+      <fieldset class="popup__content">
+        <button class="popup__close-icon" type="button"></button>
+        <form class="popup__content-container popup__form-edit" name="profile-form" novalidate>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input
+            class="popup__input popup__input_name-area"
+            type="text"
+            name="name"
+            id="userName-input"
+            value=""
+            placeholder="Ваше имя"
+            minlength="2"
+            maxlength="40"
+            required
+          />
+          <span class="popup__input-error userName-input-error"></span>
+          <input
+            class="popup__input popup__input_type_about popup__input_addictions"
+            type="text"
+            name="aboutPerson"
+            id="userAddictions-input"
+            value=""
+            placeholder="Чем Вы занимаетесь?"
+            minlength="2"
+            maxlength="200"
+            required
+          />
           <span class="popup__input-error userAddictions-input-error"></span>
           <button class="popup__button-save popup__button-save_edit" type="submit">Сохранить</button>
-      </form>
-    </fieldset>
-  </div>
-
-
-  <div class="popup popup_add-post">
-    <fieldset class="popup__content">
-      <button class="popup__close-icon" type="button"></button>
-      <form class="popup__content-container popup__form-add-post" name="card-form">
-        <h2 class="popup__title">
-          Новое место
-        </h2>
-        <input class="popup__input popup__input_name-img" type="text" name="name" id="postName-input" value="" placeholder="Название" minlength="2" maxlength="30" required>
-        <span class="popup__input-error postName-input-error"></span>
-        <input class="popup__input popup__input_type_about popup__input_url-img" type="url" name="link" id="link-input"
-          value="" placeholder="Ссылка на картинку" required>
-          <span class="popup__input-error link-input-error"></span>
-      <button class="popup__button-save popup__button-save_add-post" type="submit">Создать</button>
-      </form>
-    </fieldset>
-  </div>
-
-
-  <div class="popup popup_open-image">
-    <div class="popup__post-container">
-      <button class="popup__close-icon" type="button"></button>
-      <img class="popup__image" src="#" alt="">
-      <h2 class="popup__image-title"></h2>
+        </form>
+      </fieldset>
     </div>
-  </div>
 
+    <div class="popup popup_add-post">
+      <fieldset class="popup__content">
+        <button class="popup__close-icon" type="button"></button>
+        <form class="popup__content-container popup__form-add-post" name="card-form">
+          <h2 class="popup__title">Новое место</h2>
+          <input
+            class="popup__input popup__input_name-img"
+            type="text"
+            name="name"
+            id="postName-input"
+            value=""
+            placeholder="Название"
+            minlength="2"
+            maxlength="30"
+            required
+          />
+          <span class="popup__input-error postName-input-error"></span>
+          <input
+            class="popup__input popup__input_type_about popup__input_url-img"
+            type="url"
+            name="link"
+            id="link-input"
+            value=""
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span class="popup__input-error link-input-error"></span>
+          <button class="popup__button-save popup__button-save_add-post" type="submit">Создать</button>
+        </form>
+      </fieldset>
+    </div>
 
-  <script src="./scripts/validate.js"></script>
-  <script src="./scripts/cards.js"></script>
-  <script src="./scripts/script.js" defer="defer"></script>
-</body>
+    <div class="popup popup_open-image">
+      <div class="popup__post-container">
+        <button class="popup__close-icon" type="button"></button>
+        <img class="popup__image" src="#" alt="" />
+        <h2 class="popup__image-title"></h2>
+      </div>
+    </div>
 
+    <script type="module" src="./scripts/script.js" defer="defer"></script>
+  </body>
 </html>
