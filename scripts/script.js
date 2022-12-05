@@ -21,10 +21,8 @@ const nameImg = popupAddPost.querySelector(".popup__input_name-img");
 const linkImg = popupAddPost.querySelector(".popup__input_url-img");
 const formAddPostData = document.forms["card-form"];
 
-const popupButtonSave = document.querySelector(".popup__button-save");
-
-const formValidatorEditInfo = new FormValidator(validationConfig, popupEdit);
-const formValidatorAddPost = new FormValidator(validationConfig, popupAddPost);
+const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserData);
+const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
 
 initialCards.forEach((item) => {
   createPost(item);
@@ -69,14 +67,13 @@ function editProfile(evt) {
 
 iconDataEdit.addEventListener("click", function () {
   setValuesToUserPopup();
-  formValidatorEditInfo.resetValidation(formEditUserData);
+  formValidatorEditInfo.resetValidation();
   openPopup(popupEdit);
 });
 
 iconPostAdd.addEventListener("click", function () {
   openPopup(popupAddPost);
-  popupButtonSave.classList.add(postSelectors.buttonInactive);
-  popupButtonSave.setAttribute("disabled", "disabled");
+  formValidatorAddPost.disabledSubmit();
 });
 
 function closePopupByClick(evt) {
