@@ -17,10 +17,10 @@
           <img class="profile__img" src="./images/Kusto.jpg" alt="Изображение Жак-ив Кусто" />
           <div class="profile__info">
             <h1 class="profile__title">Крутой дед</h1>
-            <button class="profile__edit-icon" type="button"></button>
+            <button class="profile__edit-icon" type="button" aria-label="Иконка корректировка личных данных"></button>
             <p class="profile__subtitle">И немного стиля</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button class="profile__add-button" type="button" aria-label="Иконка добавления поста"></button>
         </section>
         <section class="posts" aria-label="Посты"></section>
       </main>
@@ -32,17 +32,17 @@
     <template id="post-template">
       <article class="post">
         <img class="post__img" src="#" alt="" />
-        <img class="post__delete" src="./images/Trash.svg" alt="иконка удаления поста" />
+        <button class="post__delete" type="button" aria-label="Иконка удаления попапа"></button> />
         <div class="post__info">
           <h2 class="post__title" name=""></h2>
-          <button class="post__like-icon" type="button"></button>
+          <button class="post__like-icon" type="button" aria-label="Иконка лайка"></button>
         </div>
       </article>
     </template>
 
     <div class="popup popup_edit">
       <fieldset class="popup__content">
-        <button class="popup__close-icon" type="button"></button>
+        <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
         <form class="popup__content-container popup__form-edit" name="profile-form" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
           <input
@@ -76,7 +76,7 @@
 
     <div class="popup popup_add-post">
       <fieldset class="popup__content">
-        <button class="popup__close-icon" type="button"></button>
+        <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
         <form class="popup__content-container popup__form-add-post" name="card-form">
           <h2 class="popup__title">Новое место</h2>
           <input
@@ -96,7 +96,6 @@
             type="url"
             name="link"
             id="link-input"
-            value=""
             placeholder="Ссылка на картинку"
             required
           />
@@ -108,12 +107,12 @@
 
     <div class="popup popup_open-image">
       <div class="popup__post-container">
-        <button class="popup__close-icon" type="button"></button>
+        <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
         <img class="popup__image" src="#" alt="" />
         <h2 class="popup__image-title"></h2>
       </div>
     </div>
 
-    <script type="module" src="./scripts/script.js" defer="defer"></script>
+    <script type="module" src="./scripts/script.js"></script>
   </body>
 </html>

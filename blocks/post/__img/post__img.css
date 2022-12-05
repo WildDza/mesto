@@ -6,4 +6,5 @@
   position: relative;
   object-fit: cover;
   cursor: pointer;
+  background-color: #000;
 }

@@ -5,6 +5,11 @@
   width: 18px;
   height: 19px;
   transition: 0.3s linear 0.05s;
+  background: none;
+  background-image: url(../../../images/Trash.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border: none;
 }
 
 .post__delete:hover {
