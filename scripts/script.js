@@ -1,6 +1,6 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-import { initialCards, selectors } from "./constants.js";
+import { initialCards, postSelectors, validationConfig } from "./constants.js";
 
 const iconDataEdit = document.querySelector(".profile__edit-icon");
 const titleProfile = document.querySelector(".profile__title");
@@ -21,65 +21,71 @@ const nameImg = popupAddPost.querySelector(".popup__input_name-img");
 const linkImg = popupAddPost.querySelector(".popup__input_url-img");
 const formAddPostData = document.forms["card-form"];
 
-const buttonElement = document.querySelector(".popup__button-save");
+const popupButtonSave = document.querySelector(".popup__button-save");
 
-const formValidatorEditInfo = new FormValidator(selectors, popupEdit);
-const formValidatorAddPost = new FormValidator(selectors, popupAddPost);
+const formValidatorEditInfo = new FormValidator(validationConfig, popupEdit);
+const formValidatorAddPost = new FormValidator(validationConfig, popupAddPost);
 
 initialCards.forEach((item) => {
-  const post = new Card(item, selectors, "#post-template", handleOpenPopup);
-  const postElement = post.generatePost();
-  addPost(postElement);
+  createPost(item);
 });
 
 function submitPost(evt) {
   evt.preventDefault();
-  const post = new Card({ name: nameImg.value, link: linkImg.value }, selectors, "#post-template", handleOpenPopup);
-  const postElement = post.generatePost();
-  addPost(postElement);
+  const data = {
+    name: nameImg.value,
+    link: linkImg.value,
+  };
+  createPost(data);
   formAddPostData.reset();
   closePopup(popupAddPost);
+}
+
+function createPost(data) {
+  const post = new Card(data, postSelectors, "#post-template", handleOpenPopup);
+  const postElement = post.generatePost();
+  addPost(postElement);
 }
 
 function addPost(element) {
   containerPosts.prepend(element);
 }
 
-function getValueToUserInfo() {
+function setValuesToUserInfo() {
   titleProfile.textContent = userNameInput.value;
   subtitleProfile.textContent = userJobInput.value;
 }
 
-function saveValueUserPopup() {
+function setValuesToUserPopup() {
   userNameInput.value = titleProfile.textContent;
   userJobInput.value = subtitleProfile.textContent;
 }
 
 function editProfile(evt) {
   evt.preventDefault();
-  getValueToUserInfo();
+  setValuesToUserInfo();
   closePopup(popupEdit);
 }
 
 iconDataEdit.addEventListener("click", function () {
-  saveValueUserPopup();
+  setValuesToUserPopup();
   formValidatorEditInfo.resetValidation(formEditUserData);
   openPopup(popupEdit);
 });
 
 iconPostAdd.addEventListener("click", function () {
   openPopup(popupAddPost);
-  buttonElement.classList.add(selectors.buttonInactive);
-  buttonElement.setAttribute("disabled", "disabled");
+  popupButtonSave.classList.add(postSelectors.buttonInactive);
+  popupButtonSave.setAttribute("disabled", "disabled");
 });
 
-function closeTab(evt) {
+function closePopupByClick(evt) {
   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close-icon")) {
     closePopup(evt.currentTarget);
   }
 }
 
-function closeTabKeydown(evt) {
+function closePopupByKeydown(evt) {
   if (evt.key === "Escape") {
     const popupOpen = document.querySelector(".popup_show");
     closePopup(popupOpen);
@@ -88,14 +94,14 @@ function closeTabKeydown(evt) {
 
 function openPopup(popup) {
   popup.classList.add("popup_show");
-  popup.addEventListener("mousedown", closeTab);
-  document.addEventListener("keydown", closeTabKeydown);
+  popup.addEventListener("mousedown", closePopupByClick);
+  document.addEventListener("keydown", closePopupByKeydown);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_show");
-  popup.removeEventListener("mousedown", closeTab);
-  document.removeEventListener("keydown", closeTabKeydown);
+  popup.removeEventListener("mousedown", closePopupByClick);
+  document.removeEventListener("keydown", closePopupByKeydown);
 }
 
 function handleOpenPopup(name, link) {

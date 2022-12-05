@@ -1,4 +1,4 @@
-export { initialCards, selectors };
+export { initialCards, postSelectors, validationConfig };
 
 const initialCards = [
   {
@@ -51,14 +51,16 @@ const initialCards = [
   },
 ];
 
-const selectors = {
+const postSelectors = {
   post: ".post",
   postImg: ".post__img",
   postLikeIcon: ".post__like-icon",
   postLikeIconActive: "post__like-icon_active",
   postDelete: ".post__delete",
   postTitle: ".post__title",
+};
 
+const validationConfig = {
   popupForm: ".popup__content-container",
   popupInput: ".popup__input",
   submitButton: ".popup__button-save",
