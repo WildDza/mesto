@@ -24,9 +24,7 @@ const formAddPostData = document.forms["card-form"];
 const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserData);
 const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
 
-initialCards.forEach((item) => {
-  createPost(item);
-});
+initialCards.forEach(createPost);
 
 function submitPost(evt) {
   evt.preventDefault();
@@ -73,7 +71,7 @@ iconDataEdit.addEventListener("click", function () {
 
 iconPostAdd.addEventListener("click", function () {
   openPopup(popupAddPost);
-  formValidatorAddPost.disabledSubmit();
+  formValidatorAddPost.toggleButtonState();
 });
 
 function closePopupByClick(evt) {
