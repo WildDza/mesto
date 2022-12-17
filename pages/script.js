@@ -1,6 +1,6 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { initialCards, postSelectors, validationConfig } from "./constants.js";
+import { Card } from "../scripts/Card.js";
+import { FormValidator } from "../scripts/FormValidator.js";
+import { initialCards, postSelectors, validationConfig } from "../utils/constants.js";
 
 const iconDataEdit = document.querySelector(".profile__edit-icon");
 const titleProfile = document.querySelector(".profile__title");
@@ -43,6 +43,7 @@ function createPost(data) {
   addPost(postElement);
 }
 
+// added in Section.js
 function addPost(element) {
   containerPosts.prepend(element);
 }
