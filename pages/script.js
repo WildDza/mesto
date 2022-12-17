@@ -1,5 +1,5 @@
-import { Card } from "../scripts/Card.js";
-import { FormValidator } from "../scripts/FormValidator.js";
+import Card from "../scripts/Card.js";
+import FormValidator from "../scripts/FormValidator.js";
 import { initialCards, postSelectors, validationConfig } from "../utils/constants.js";
 
 const iconDataEdit = document.querySelector(".profile__edit-icon");
@@ -75,12 +75,14 @@ iconPostAdd.addEventListener("click", function () {
   formValidatorAddPost.toggleButtonState();
 });
 
+// added in Popup.js
 function closePopupByClick(evt) {
   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close-icon")) {
     closePopup(evt.currentTarget);
   }
 }
 
+// added in Popup.js
 function closePopupByKeydown(evt) {
   if (evt.key === "Escape") {
     const popupOpen = document.querySelector(".popup_show");
@@ -88,12 +90,14 @@ function closePopupByKeydown(evt) {
   }
 }
 
+// added in Popup.js
 function openPopup(popup) {
   popup.classList.add("popup_show");
   popup.addEventListener("mousedown", closePopupByClick);
   document.addEventListener("keydown", closePopupByKeydown);
 }
 
+// added in Popup.js
 function closePopup(popup) {
   popup.classList.remove("popup_show");
   popup.removeEventListener("mousedown", closePopupByClick);
