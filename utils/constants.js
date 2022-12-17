@@ -68,3 +68,10 @@ const validationConfig = {
   popupInputTypeError: "popup__input_type_error",
   popupInputErrorActive: "popup__input-error_active",
 };
+
+export const popupImage = document.querySelector(".popup_open-image");
+export const popupAddPost = document.querySelector(".popup_add-post");
+export const popupEdit = document.querySelector(".popup_edit");
+export const containerPosts = document.querySelector(".posts");
+export const titleProfile = document.querySelector(".profile__title");
+export const subtitleProfile = document.querySelector(".profile__subtitle");
