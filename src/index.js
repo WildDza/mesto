@@ -1,9 +1,10 @@
-import Card from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import Section from "../scripts/Section.js";
-import UserInfo from "../scripts/UserInfo.js";
+import "./styles/index.css";
+import Card from "./scripts/Card.js";
+import FormValidator from "./scripts/FormValidator.js";
+import PopupWithForm from "./scripts/PopupWithForm.js";
+import PopupWithImage from "./scripts/PopupWithImage.js";
+import Section from "./scripts/Section.js";
+import UserInfo from "./scripts/UserInfo.js";
 import {
   initialCards,
   postSelectors,
@@ -14,7 +15,7 @@ import {
   containerPosts,
   titleProfile,
   subtitleProfile,
-} from "../utils/constants.js";
+} from "./utils/constants.js";
 
 const iconDataEdit = document.querySelector(".profile__edit-icon");
 
