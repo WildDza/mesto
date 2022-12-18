@@ -9,11 +9,11 @@
   <body class="root">
     <div class="page">
       <header class="header">
-        <img class="header__logo" src="./images/logo.svg" alt="логотип 'Mesto'" />
+        <img class="header__logo" src="<%=require ('./images/logo.svg') %>" alt="логотип 'Mesto'" />
       </header>
       <main class="content">
         <section class="profile" aria-label="Профиль">
-          <img class="profile__img" src="./images/Kusto.jpg" alt="Изображение Жак-ив Кусто" />
+          <img class="profile__img" src="<%=require ('./images/Kusto.jpg') %>" alt="Изображение Жак-ив Кусто" />
           <div class="profile__info">
             <h1 class="profile__title">Крутой дед</h1>
             <button class="profile__edit-icon" type="button" aria-label="Иконка корректировка личных данных"></button>
