@@ -40,5 +40,6 @@ export default class Card {
 
   _handlePostDelete() {
     this._element.remove();
+    this._element = null;
   }
 }
