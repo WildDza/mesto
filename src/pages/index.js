@@ -30,7 +30,7 @@ const iconPostAdd = document.querySelector(".profile__add-button");
 let userId;
 
 api.getProfileInformation().then((res) => {
-  console.log("otvet", res);
+  console.log(res);
   userInfo.setUserInfo(res);
   userId = res._id;
 });
