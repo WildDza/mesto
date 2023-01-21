@@ -64,15 +64,33 @@ const confirmDelPost = new PopupWithForm(popupWithConfirmDelPost);
 postsList.render();
 
 function createPost(data) {
-  const post = new Card(data, postSelectors, "#post-template", handleOpenPopup, (_id) => {
-    confirmDelPost.open();
-    confirmDelPost.confirmDeleteSubmitHandler(() => {
-      api.deletePost(_id).then((res) => {
-        confirmDelPost.close();
-        post.deletePost();
+  const post = new Card(
+    data,
+    postSelectors,
+    "#post-template",
+    handleOpenPopup,
+    (id) => {
+      confirmDelPost.open();
+      confirmDelPost.confirmDeleteSubmitHandler(() => {
+        api.deletePost(id).then((res) => {
+          confirmDelPost.close();
+          post.deletePost();
+        });
       });
-    });
-  });
+    },
+    userId,
+    (id) => {
+      if (post.isLiked()) {
+        api.deleteLike(id).then((res) => {
+          post.setLikes(res.likes);
+        });
+      } else {
+        api.addLike(id).then((res) => {
+          post.setLikes(res.likes);
+        });
+      }
+    }
+  );
   return post.generatePost();
 }
 
