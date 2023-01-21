@@ -75,3 +75,4 @@ export const popupEdit = document.querySelector(".popup_edit");
 export const containerPosts = document.querySelector(".posts");
 export const titleProfile = document.querySelector(".profile__title");
 export const subtitleProfile = document.querySelector(".profile__subtitle");
+export const popupWithConfirmDelPost = document.querySelector(".popup_confirm-delete-post");

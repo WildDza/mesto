@@ -15,7 +15,9 @@ import {
   containerPosts,
   titleProfile,
   subtitleProfile,
+  popupWithConfirmDelPost,
 } from "../utils/constants.js";
+import { api } from "../scripts/Api.js";
 
 const iconDataEdit = document.querySelector(".profile__edit-icon");
 
@@ -25,36 +27,59 @@ const formEditUserData = document.forms["profile-form"];
 
 const iconPostAdd = document.querySelector(".profile__add-button");
 
+let userId;
+
+api.getProfileInformation().then((res) => {
+  console.log("otvet", res);
+  userInfo.setUserInfo(res);
+  userId = res._id;
+});
+
+api.getInitialCards().then((cardList) => {
+  cardList.forEach((data) => {
+    const postElement = createPost(data);
+    postsList.addItem(postElement);
+  });
+});
+
 const formAddPostData = document.forms["card-form"];
 
 const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserData);
 const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
-
 const popupOpenImage = new PopupWithImage(popupImage);
 const popupWithFormAddPost = new PopupWithForm(popupAddPost, submitPost);
 const popupWithFormEdit = new PopupWithForm(popupEdit, submitEditProfile);
-
 const userInfo = new UserInfo(titleProfile, subtitleProfile);
-
 const postsList = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: (item) => {
       addPost(item);
     },
   },
   containerPosts
 );
+const confirmDelPost = new PopupWithForm(popupWithConfirmDelPost);
 
 postsList.render();
 
 function createPost(data) {
-  const post = new Card(data, postSelectors, "#post-template", handleOpenPopup);
+  const post = new Card(data, postSelectors, "#post-template", handleOpenPopup, (_id) => {
+    confirmDelPost.open();
+    confirmDelPost.confirmDeleteSubmitHandler(() => {
+      api.deletePost(_id).then((res) => {
+        confirmDelPost.close();
+        post.deletePost();
+      });
+    });
+  });
   return post.generatePost();
 }
 
 function submitPost(data) {
-  addPost(data);
+  api.addPost(data.name, data.link).then((res) => {
+    addPost(res);
+  });
   popupWithFormAddPost.close();
 }
 
@@ -64,8 +89,10 @@ function addPost(data) {
 }
 
 function submitEditProfile(data) {
-  userInfo.setUserInfo(data);
-  popupWithFormEdit.close();
+  api.editProfileInformation(data.name, data.about).then((res) => {
+    userInfo.setUserInfo(res);
+    popupWithFormEdit.close();
+  });
 }
 
 iconDataEdit.addEventListener("click", () => {
@@ -84,6 +111,8 @@ iconPostAdd.addEventListener("click", function () {
 function handleOpenPopup(name, link) {
   popupOpenImage.open(name, link);
 }
+
+confirmDelPost.setEventListeners();
 
 formValidatorEditInfo.enableValidation();
 formValidatorAddPost.enableValidation();

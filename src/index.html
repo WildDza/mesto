@@ -15,9 +15,9 @@
         <section class="profile" aria-label="Профиль">
           <img class="profile__img" src="<%=require ('./images/Kusto.jpg') %>" alt="Изображение Жак-ив Кусто" />
           <div class="profile__info">
-            <h1 class="profile__title">Крутой дед</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-icon" type="button" aria-label="Иконка корректировка личных данных"></button>
-            <p class="profile__subtitle">И немного стиля</p>
+            <p class="profile__subtitle"></p>
           </div>
           <button class="profile__add-button" type="button" aria-label="Иконка добавления поста"></button>
         </section>
@@ -35,6 +35,7 @@
         <div class="post__info">
           <h2 class="post__title" name=""></h2>
           <button class="post__like-icon" type="button" aria-label="Иконка лайка"></button>
+          <span class="post__likes-counter"></span>
         </div>
       </article>
     </template>
@@ -59,7 +60,7 @@
           <input
             class="popup__input popup__input_type_about popup__input_addictions"
             type="text"
-            name="aboutPerson"
+            name="about"
             id="userAddictions-input"
             value=""
             placeholder="Чем Вы занимаетесь?"
@@ -110,6 +111,16 @@
         <img class="popup__image" src="#" alt="" />
         <h2 class="popup__image-title"></h2>
       </div>
+    </div>
+
+    <div class="popup popup_confirm-delete-post">
+      <fieldset class="popup__content">
+        <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
+        <form class="popup__content-container popup__form" name="card-form">
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__button-save popup__button-save_add-post" type="submit">Да</button>
+        </form>
+      </fieldset>
     </div>
   </body>
 </html>
