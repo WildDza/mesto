@@ -6,26 +6,28 @@ import PopupWithImage from "../scripts/PopupWithImage.js";
 import Section from "../scripts/Section.js";
 import UserInfo from "../scripts/UserInfo.js";
 import {
-  initialCards,
   postSelectors,
   validationConfig,
   popupImage,
   popupAddPost,
   popupEdit,
+  popupAvatar,
   containerPosts,
   titleProfile,
   subtitleProfile,
   popupWithConfirmDelPost,
+  iconDataEdit,
+  formEditUserData,
+  iconPostAdd,
+  formAddPostData,
+  formChangeAvatar,
+  buttonAvatar,
+  avatar,
 } from "../utils/constants.js";
 import { api } from "../scripts/Api.js";
 
-const iconDataEdit = document.querySelector(".profile__edit-icon");
-
 const userNameInput = popupEdit.querySelector(".popup__input_name-area");
 const userJobInput = popupEdit.querySelector(".popup__input_addictions");
-const formEditUserData = document.forms["profile-form"];
-
-const iconPostAdd = document.querySelector(".profile__add-button");
 
 let userId;
 
@@ -42,14 +44,15 @@ api.getInitialCards().then((cardList) => {
   });
 });
 
-const formAddPostData = document.forms["card-form"];
-
 const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserData);
 const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
+const formValidatorChangeAvatar = new FormValidator(validationConfig, formChangeAvatar);
 const popupOpenImage = new PopupWithImage(popupImage);
 const popupWithFormAddPost = new PopupWithForm(popupAddPost, submitPost);
 const popupWithFormEdit = new PopupWithForm(popupEdit, submitEditProfile);
-const userInfo = new UserInfo(titleProfile, subtitleProfile);
+const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitEditAvatar);
+const confirmDelPost = new PopupWithForm(popupWithConfirmDelPost);
+const userInfo = new UserInfo(titleProfile, subtitleProfile, avatar);
 const postsList = new Section(
   {
     items: [],
@@ -59,7 +62,6 @@ const postsList = new Section(
   },
   containerPosts
 );
-const confirmDelPost = new PopupWithForm(popupWithConfirmDelPost);
 
 postsList.render();
 
@@ -95,10 +97,17 @@ function createPost(data) {
 }
 
 function submitPost(data) {
-  api.addPost(data.name, data.link).then((res) => {
-    addPost(res);
-  });
-  popupWithFormAddPost.close();
+  popupWithFormAddPost.renderLoadingChanges(true);
+  api
+    .addPost(data.name, data.link)
+    .then((res) => {
+      addPost(res);
+      popupWithFormAddPost.close();
+    })
+    .catch(console.log)
+    .finally(() => {
+      popupWithFormAddPost.renderLoadingChanges(false);
+    });
 }
 
 function addPost(data) {
@@ -107,10 +116,31 @@ function addPost(data) {
 }
 
 function submitEditProfile(data) {
-  api.editProfileInformation(data.name, data.about).then((res) => {
-    userInfo.setUserInfo(res);
-    popupWithFormEdit.close();
-  });
+  popupWithFormEdit.renderLoadingChanges(true);
+  api
+    .editProfileInformation(data.name, data.about)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupWithFormEdit.close();
+    })
+    .catch(console.log)
+    .finally(() => {
+      popupWithFormEdit.renderLoadingChanges(false);
+    });
+}
+
+function submitEditAvatar(data) {
+  popupWithFormAvatar.renderLoadingChanges(true);
+  api
+    .editUserAvatar(data.avatar)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupWithFormAvatar.close();
+    })
+    .catch(console.log)
+    .finally(() => {
+      popupWithFormAvatar.renderLoadingChanges(false);
+    });
 }
 
 iconDataEdit.addEventListener("click", () => {
@@ -119,6 +149,11 @@ iconDataEdit.addEventListener("click", () => {
   userJobInput.value = userJob;
   formValidatorEditInfo.resetValidation();
   popupWithFormEdit.open();
+});
+
+buttonAvatar.addEventListener("click", () => {
+  popupWithFormAvatar.open();
+  formValidatorChangeAvatar.toggleButtonState();
 });
 
 iconPostAdd.addEventListener("click", function () {
@@ -134,3 +169,4 @@ confirmDelPost.setEventListeners();
 
 formValidatorEditInfo.enableValidation();
 formValidatorAddPost.enableValidation();
+formValidatorChangeAvatar.enableValidation();

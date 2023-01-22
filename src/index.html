@@ -13,7 +13,13 @@
       </header>
       <main class="content">
         <section class="profile" aria-label="Профиль">
-          <img class="profile__img" src="<%=require ('./images/Kusto.jpg') %>" alt="Изображение Жак-ив Кусто" />
+          <div class="profile__avatar-container">
+            <div class="profile__avatar-icon">
+              <button class="profile__avatar-edit" type="button" aria-label="Иконка карандаша"></button>
+            </div>
+            <img class="profile__img" alt="Фото профиля" />
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__title"></h1>
             <button class="profile__edit-icon" type="button" aria-label="Иконка корректировка личных данных"></button>
@@ -34,8 +40,10 @@
         <button class="post__delete" type="button" aria-label="Иконка удаления попапа"></button> />
         <div class="post__info">
           <h2 class="post__title" name=""></h2>
-          <button class="post__like-icon" type="button" aria-label="Иконка лайка"></button>
-          <span class="post__likes-counter"></span>
+          <div class="post__like">
+            <button class="post__like-icon" type="button" aria-label="Иконка лайка"></button>
+            <span class="post__likes-counter"></span>
+          </div>
         </div>
       </article>
     </template>
@@ -116,9 +124,28 @@
     <div class="popup popup_confirm-delete-post">
       <fieldset class="popup__content">
         <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
-        <form class="popup__content-container popup__form" name="card-form">
+        <form class="popup__content-container popup__form" name="confirm-delete-post-form">
           <h2 class="popup__title">Вы уверены?</h2>
           <button class="popup__button-save popup__button-save_add-post" type="submit">Да</button>
+        </form>
+      </fieldset>
+    </div>
+
+    <div class="popup popup_change-avatar">
+      <fieldset class="popup__content">
+        <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
+        <form class="popup__content-container popup__form" name="change-avatar-form">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input
+            class="popup__input popup__input_type_about popup__input_type_avatar popup__input_url-img"
+            type="url"
+            name="avatar"
+            id="avatar-input"
+            placeholder="Ссылка на аватар"
+            required
+          />
+          <span class="popup__input-error avatar-input-error"></span>
+          <button class="popup__button-save popup__button-save_avatar" type="submit">Сохранить</button>
         </form>
       </fieldset>
     </div>

@@ -42,7 +42,13 @@ export default class Card {
   setLikes(likes) {
     this._likes = likes;
     const likesCounter = this._element.querySelector(".post__likes-counter");
-    likesCounter.textContent = this._likes.length;
+
+    if (!this._likes.length) {
+      likesCounter.textContent = "";
+    } else {
+      likesCounter.textContent = this._likes.length;
+    }
+
     this._handlePostLike();
   }
 
