@@ -23,11 +23,10 @@ import {
   formChangeAvatar,
   buttonAvatar,
   avatar,
+  userNameInput,
+  userJobInput,
 } from "../utils/constants.js";
 import { api } from "../scripts/Api.js";
-
-const userNameInput = popupEdit.querySelector(".popup__input_name-area");
-const userJobInput = popupEdit.querySelector(".popup__input_addictions");
 
 let userId;
 

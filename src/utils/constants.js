@@ -33,3 +33,5 @@ export const formAddPostData = document.forms["card-form"];
 export const formChangeAvatar = document.forms["change-avatar-form"];
 export const buttonAvatar = document.querySelector(".profile__avatar-container");
 export const avatar = document.querySelector(".profile__img");
+export const userNameInput = popupEdit.querySelector(".popup__input_name-area");
+export const userJobInput = popupEdit.querySelector(".popup__input_addictions");
