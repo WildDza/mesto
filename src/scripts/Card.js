@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, selectors, templateSelector, handleOpenPopup, handleDeleteClick, userId, handleLikeClick) {
+  constructor(data, selectors, handleOpenPopup, handleDeleteClick, userId, handleLikeClick) {
     this._link = data.link;
     this._name = data.name;
     this._likes = data.likes;
@@ -10,17 +10,17 @@ export default class Card {
     this._postImgSelector = selectors.postImg;
     this._postLikeIconSelector = selectors.postLikeIcon;
     this._postLikeIconActiveSelector = selectors.postLikeIconActive;
+    this._postLikeCounterSelector = selectors.postLikeCounter;
     this._postDeleteSelector = selectors.postDelete;
     this._postTitleSelector = selectors.postTitle;
-    this._templateSelector = templateSelector;
+    this._templateSelector = selectors.templateSelector;
     this._handleOpenPopup = handleOpenPopup;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector(this._templateSelector).content.querySelector(this._postSelector).cloneNode(true);
-    return cardElement;
+    return document.querySelector(this._templateSelector).content.querySelector(this._postSelector).cloneNode(true);
   }
 
   generatePost() {
@@ -30,10 +30,11 @@ export default class Card {
     this._postImage.src = this._link;
     this._element.querySelector(this._postTitleSelector).textContent = this._name;
     this._postImage.alt = this._name;
+    this._likesCounter = this._element.querySelector(this._postLikeCounterSelector);
     this.setLikes(this._likes);
 
     if (this._ownerId !== this._userId) {
-      this._element.querySelector(".post__delete").style.display = "none";
+      this._element.querySelector(this._postDeleteSelector).style.display = "none";
     }
 
     return this._element;
@@ -41,15 +42,14 @@ export default class Card {
 
   setLikes(likes) {
     this._likes = likes;
-    const likesCounter = this._element.querySelector(".post__likes-counter");
 
     if (!this._likes.length) {
-      likesCounter.textContent = "";
+      this._likesCounter.textContent = "";
     } else {
-      likesCounter.textContent = this._likes.length;
+      this._likesCounter.textContent = this._likes.length;
     }
 
-    this._handlePostLike();
+    this._toggleLike();
   }
 
   isLiked() {
@@ -57,16 +57,17 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector(this._postLikeIconSelector).addEventListener("click", () => this._handleLikeClick(this._id));
+    this._postLike = this._element.querySelector(this._postLikeIconSelector);
+    this._postLike.addEventListener("click", () => this._handleLikeClick(this._id));
     this._element.querySelector(this._postDeleteSelector).addEventListener("click", () => this._handleDeleteClick(this._id));
     this._postImage.addEventListener("click", () => this._handleOpenPopup(this._name, this._link));
   }
 
-  _handlePostLike() {
+  _toggleLike() {
     if (this.isLiked()) {
-      this._element.querySelector(this._postLikeIconSelector).classList.add(this._postLikeIconActiveSelector);
+      this._postLike.classList.add(this._postLikeIconActiveSelector);
     } else {
-      this._element.querySelector(this._postLikeIconSelector).classList.remove(this._postLikeIconActiveSelector);
+      this._postLike.classList.remove(this._postLikeIconActiveSelector);
     }
   }
 

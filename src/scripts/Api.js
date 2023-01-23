@@ -5,16 +5,19 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   getProfileInformation() {
-    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers }).then(this._getResponseData);
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    return fetch(`${this._baseUrl}/cards`, { headers: this._headers }).then(this._getResponseData);
   }
 
   // другие методы работы с API
@@ -26,9 +29,7 @@ class Api {
         name,
         about,
       }),
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 
   addPost(name, link) {
@@ -39,36 +40,28 @@ class Api {
         name,
         link,
       }),
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 
   deletePost(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 
   editUserAvatar(avatar) {
@@ -78,9 +71,7 @@ class Api {
       body: JSON.stringify({
         avatar,
       }),
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+    }).then(this._getResponseData);
   }
 }
 

@@ -53,7 +53,6 @@ function createPost(data) {
   const post = new Card(
     data,
     postSelectors,
-    "#post-template",
     handleOpenPopup,
     (id) => {
       confirmationPopup.open();
@@ -97,7 +96,9 @@ function handlePostFormSubmit(data) {
       postsSection.addItem(res);
       popupWithFormAddPost.close();
     })
-    .catch(console.log)
+    .catch((err) => {
+      console.log(`Ошибка... ${err}`);
+    })
     .finally(() => {
       popupWithFormAddPost.renderLoadingChanges(false);
     });
@@ -111,7 +112,9 @@ function handleProfileFormSubmit(data) {
       userInfo.setUserInfo(res);
       popupWithFormEdit.close();
     })
-    .catch(console.log)
+    .catch((err) => {
+      console.log(`Ошибка... ${err}`);
+    })
     .finally(() => {
       popupWithFormEdit.renderLoadingChanges(false);
     });

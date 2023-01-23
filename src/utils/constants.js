@@ -7,6 +7,8 @@ const postSelectors = {
   postLikeIconActive: "post__like-icon_active",
   postDelete: ".post__delete",
   postTitle: ".post__title",
+  templateSelector: "#post-template",
+  postLikeCounter: ".post__likes-counter",
 };
 
 const validationConfig = {
