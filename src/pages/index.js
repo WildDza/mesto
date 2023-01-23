@@ -28,20 +28,6 @@ import {
 } from "../utils/constants.js";
 import { api } from "../scripts/Api.js";
 
-let userId;
-
-api.getProfileInformation().then((res) => {
-  userInfo.setUserInfo(res);
-  userId = res._id;
-});
-
-api.getInitialCards().then((cardList) => {
-  cardList.forEach((data) => {
-    const postElement = createPost(data);
-    postsList.addItem(postElement);
-  });
-});
-
 const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserData);
 const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
 const formValidatorChangeAvatar = new FormValidator(validationConfig, formChangeAvatar);
@@ -49,19 +35,19 @@ const popupOpenImage = new PopupWithImage(popupImage);
 const popupWithFormAddPost = new PopupWithForm(popupAddPost, submitPost);
 const popupWithFormEdit = new PopupWithForm(popupEdit, submitEditProfile);
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitEditAvatar);
-const confirmDelPost = new PopupWithForm(popupWithConfirmDelPost);
+const confirmationPopup = new PopupWithForm(popupWithConfirmDelPost);
 const userInfo = new UserInfo(titleProfile, subtitleProfile, avatar);
-const postsList = new Section(
-  {
-    items: [],
-    renderer: (item) => {
-      addPost(item);
-    },
-  },
-  containerPosts
-);
+const postsSection = new Section({ renderer: createPost }, containerPosts);
 
-postsList.render();
+let userId;
+
+Promise.all([api.getProfileInformation(), api.getInitialCards()])
+  .then(([res, data]) => {
+    userInfo.setUserInfo(res);
+    userId = res._id;
+    postsSection.renderItems(data);
+  })
+  .catch(console.log);
 
 function createPost(data) {
   const post = new Card(
@@ -70,10 +56,10 @@ function createPost(data) {
     "#post-template",
     handleOpenPopup,
     (id) => {
-      confirmDelPost.open();
-      confirmDelPost.confirmDeleteSubmitHandler(() => {
+      confirmationPopup.open();
+      confirmationPopup.confirmDeleteSubmitHandler(() => {
         api.deletePost(id).then((res) => {
-          confirmDelPost.close();
+          confirmationPopup.close();
           post.deletePost();
         });
       });
@@ -110,7 +96,7 @@ function submitPost(data) {
 
 function addPost(data) {
   const postElement = createPost(data);
-  postsList.addItem(postElement);
+  postsSection.addItem(postElement);
 }
 
 function submitEditProfile(data) {
@@ -163,7 +149,7 @@ function handleOpenPopup(name, link) {
   popupOpenImage.open(name, link);
 }
 
-confirmDelPost.setEventListeners();
+confirmationPopup.setEventListeners();
 
 formValidatorEditInfo.enableValidation();
 formValidatorAddPost.enableValidation();
