@@ -31,7 +31,6 @@ import { api } from "../scripts/Api.js";
 let userId;
 
 api.getProfileInformation().then((res) => {
-  console.log(res);
   userInfo.setUserInfo(res);
   userId = res._id;
 });
