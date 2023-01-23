@@ -32,9 +32,9 @@ const formValidatorEditInfo = new FormValidator(validationConfig, formEditUserDa
 const formValidatorAddPost = new FormValidator(validationConfig, formAddPostData);
 const formValidatorChangeAvatar = new FormValidator(validationConfig, formChangeAvatar);
 const popupOpenImage = new PopupWithImage(popupImage);
-const popupWithFormAddPost = new PopupWithForm(popupAddPost, submitPost);
-const popupWithFormEdit = new PopupWithForm(popupEdit, submitEditProfile);
-const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitEditAvatar);
+const popupWithFormAddPost = new PopupWithForm(popupAddPost, handlePostFormSubmit);
+const popupWithFormEdit = new PopupWithForm(popupEdit, handleProfileFormSubmit);
+const popupWithFormAvatar = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
 const confirmationPopup = new PopupWithForm(popupWithConfirmDelPost);
 const userInfo = new UserInfo(titleProfile, subtitleProfile, avatar);
 const postsSection = new Section({ renderer: createPost }, containerPosts);
@@ -58,34 +58,43 @@ function createPost(data) {
     (id) => {
       confirmationPopup.open();
       confirmationPopup.confirmDeleteSubmitHandler(() => {
-        api.deletePost(id).then((res) => {
-          confirmationPopup.close();
-          post.deletePost();
-        });
+        api
+          .deletePost(id)
+          .then((res) => {
+            confirmationPopup.close();
+            post.deletePost();
+          })
+          .catch(console.log);
       });
     },
     userId,
     (id) => {
       if (post.isLiked()) {
-        api.deleteLike(id).then((res) => {
-          post.setLikes(res.likes);
-        });
+        api
+          .deleteLike(id)
+          .then((res) => {
+            post.setLikes(res.likes);
+          })
+          .catch(console.log);
       } else {
-        api.addLike(id).then((res) => {
-          post.setLikes(res.likes);
-        });
+        api
+          .addLike(id)
+          .then((res) => {
+            post.setLikes(res.likes);
+          })
+          .catch(console.log);
       }
     }
   );
   return post.generatePost();
 }
 
-function submitPost(data) {
+function handlePostFormSubmit(data) {
   popupWithFormAddPost.renderLoadingChanges(true);
   api
     .addPost(data.name, data.link)
     .then((res) => {
-      addPost(res);
+      postsSection.addItem(res);
       popupWithFormAddPost.close();
     })
     .catch(console.log)
@@ -94,12 +103,7 @@ function submitPost(data) {
     });
 }
 
-function addPost(data) {
-  const postElement = createPost(data);
-  postsSection.addItem(postElement);
-}
-
-function submitEditProfile(data) {
+function handleProfileFormSubmit(data) {
   popupWithFormEdit.renderLoadingChanges(true);
   api
     .editProfileInformation(data.name, data.about)
@@ -113,7 +117,7 @@ function submitEditProfile(data) {
     });
 }
 
-function submitEditAvatar(data) {
+function handleAvatarFormSubmit(data) {
   popupWithFormAvatar.renderLoadingChanges(true);
   api
     .editUserAvatar(data.avatar)
@@ -125,6 +129,10 @@ function submitEditAvatar(data) {
     .finally(() => {
       popupWithFormAvatar.renderLoadingChanges(false);
     });
+}
+
+function handleOpenPopup(name, link) {
+  popupOpenImage.open(name, link);
 }
 
 iconDataEdit.addEventListener("click", () => {
@@ -144,10 +152,6 @@ iconPostAdd.addEventListener("click", function () {
   popupWithFormAddPost.open();
   formValidatorAddPost.toggleButtonState();
 });
-
-function handleOpenPopup(name, link) {
-  popupOpenImage.open(name, link);
-}
 
 confirmationPopup.setEventListeners();
 
