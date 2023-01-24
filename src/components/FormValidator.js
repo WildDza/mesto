@@ -44,7 +44,6 @@ export default class FormValidator {
       this._popupButtonSubmit.disabled = false;
       this._popupButtonSubmit.classList.remove(this._submitButtonInactive);
     } else {
-      console.log(this._popupButtonSubmit);
       this._popupButtonSubmit.classList.add(this._submitButtonInactive);
       this._popupButtonSubmit.disabled = true;
     }
