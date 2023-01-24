@@ -37,7 +37,7 @@
     <template id="post-template">
       <article class="post">
         <img class="post__img" src="#" alt="" />
-        <button class="post__delete" type="button" aria-label="Иконка удаления попапа"></button> />
+        <button class="post__delete" type="button" aria-label="Иконка удаления поста"></button> />
         <div class="post__info">
           <h2 class="post__title" name=""></h2>
           <div class="post__like">
@@ -124,10 +124,10 @@
     <div class="popup popup_confirm-delete-post">
       <fieldset class="popup__content">
         <button class="popup__close-icon" type="button" aria-label="Иконка закрытия попапа"></button>
-        <form class="popup__content-container popup__form" name="confirm-delete-post-form">
+        <div class="popup__content-container">
           <h2 class="popup__title">Вы уверены?</h2>
-          <button class="popup__button-save popup__button-save_add-post" type="submit">Да</button>
-        </form>
+          <button class="popup__button-save">Да</button>
+        </div>
       </fieldset>
     </div>
 

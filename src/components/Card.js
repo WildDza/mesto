@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, selectors, handleOpenPopup, handleDeleteClick, userId, handleLikeClick) {
+  constructor(data, selectors, handleOpenPopup, handleOpenConfirmDeletePopup, handleDeleteClick, userId, handleLikeClick) {
     this._link = data.link;
     this._name = data.name;
     this._likes = data.likes;
@@ -15,12 +15,16 @@ export default class Card {
     this._postTitleSelector = selectors.postTitle;
     this._templateSelector = selectors.templateSelector;
     this._handleOpenPopup = handleOpenPopup;
+    this._handleOpenConfirmDeletePopup = handleOpenConfirmDeletePopup.bind(this);
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
     return document.querySelector(this._templateSelector).content.querySelector(this._postSelector).cloneNode(true);
+  }
+  _handleClickDeleteButton() {
+    this._handleOpenConfirmDeletePopup(this._id);
   }
 
   generatePost() {
@@ -36,6 +40,9 @@ export default class Card {
     if (this._ownerId !== this._userId) {
       this._element.querySelector(this._postDeleteSelector).style.display = "none";
     }
+
+    // this._deletePostButton = this._element.querySelector(this._postDeleteSelector);
+    // this._deletePostButton.addEventListener("mousedown", this._handleClickDeleteButton.bind(this));
 
     return this._element;
   }
@@ -59,7 +66,8 @@ export default class Card {
   _setEventListeners() {
     this._postLike = this._element.querySelector(this._postLikeIconSelector);
     this._postLike.addEventListener("click", () => this._handleLikeClick(this._id));
-    this._element.querySelector(this._postDeleteSelector).addEventListener("click", () => this._handleDeleteClick(this._id));
+    this._element.querySelector(this._postDeleteSelector).addEventListener("click", this._handleClickDeleteButton.bind(this));
+
     this._postImage.addEventListener("click", () => this._handleOpenPopup(this._name, this._link));
   }
 

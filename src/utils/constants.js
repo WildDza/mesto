@@ -14,8 +14,8 @@ const postSelectors = {
 const validationConfig = {
   popupForm: ".popup__content-container",
   popupInput: ".popup__input",
-  submitButton: ".popup__button-save",
-  submitButtonInactive: "popup__button-save_inactive",
+  saveButton: ".popup__button-save",
+  saveButtonInactive: "popup__button-save_inactive",
   popupInputTypeError: "popup__input_type_error",
   popupInputErrorActive: "popup__input-error_active",
 };

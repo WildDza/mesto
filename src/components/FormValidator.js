@@ -4,8 +4,8 @@ export default class FormValidator {
     this._popupInputSelector = config.popupInput;
     this._popupInputTypeError = config.popupInputTypeError;
     this._popupInputErrorActive = config.popupInputErrorActive;
-    this._submitButtonSelector = config.submitButton;
-    this._submitButtonInactive = config.submitButtonInactive;
+    this._submitButtonSelector = config.saveButton;
+    this._submitButtonInactive = config.saveButtonInactive;
     this._popupInputList = Array.from(this._form.querySelectorAll(this._popupInputSelector));
     this._popupButtonSubmit = this._form.querySelector(this._submitButtonSelector);
   }
@@ -44,6 +44,7 @@ export default class FormValidator {
       this._popupButtonSubmit.disabled = false;
       this._popupButtonSubmit.classList.remove(this._submitButtonInactive);
     } else {
+      console.log(this._popupButtonSubmit);
       this._popupButtonSubmit.classList.add(this._submitButtonInactive);
       this._popupButtonSubmit.disabled = true;
     }
