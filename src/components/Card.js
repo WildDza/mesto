@@ -41,9 +41,6 @@ export default class Card {
       this._element.querySelector(this._postDeleteSelector).style.display = "none";
     }
 
-    // this._deletePostButton = this._element.querySelector(this._postDeleteSelector);
-    // this._deletePostButton.addEventListener("mousedown", this._handleClickDeleteButton.bind(this));
-
     return this._element;
   }
 

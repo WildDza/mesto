@@ -3,7 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithConfirmation extends Popup {
   constructor(popup, handleConfirm, selector) {
     super(popup);
-    this._qwe = handleConfirm.bind(this);
+    this._handleConfirmDel = handleConfirm.bind(this);
     this._buttonSave = this.popup.querySelector(selector);
     this._defaultTextInButton = this._buttonSave.textContent;
   }
@@ -17,15 +17,13 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   _handleConfirm() {
-    // console.log(this);
-    this._qwe(this._id);
+    this._handleConfirmDel(this._id);
   }
 
   open(id) {
     super.open();
     this._id = id;
     this._buttonSave.addEventListener("mousedown", this._handleConfirm.bind(this));
-    // console.log(id);
   }
 
   close() {
