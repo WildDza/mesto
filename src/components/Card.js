@@ -16,7 +16,6 @@ export default class Card {
     this._templateSelector = selectors.templateSelector;
     this._handleOpenPopup = handleOpenPopup;
     this._handleOpenConfirmDeletePopup = handleOpenConfirmDeletePopup.bind(this);
-    this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
   }
 
@@ -29,6 +28,7 @@ export default class Card {
 
   generatePost() {
     this._element = this._getTemplate();
+    this._element.setAttribute("id", this._id);
     this._postImage = this._element.querySelector(this._postImgSelector);
     this._setEventListeners();
     this._postImage.src = this._link;

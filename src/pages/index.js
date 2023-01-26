@@ -38,6 +38,7 @@ const popupWithFormEdit = new PopupWithForm(popupEdit, handleProfileFormSubmit);
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
 const userInfo = new UserInfo(titleProfile, subtitleProfile, avatar);
 const postsSection = new Section({ renderer: createPost }, containerPosts);
+const confirmationPopup = new PopupWithConfirmation(popupWithConfirmDelPost, handleDeleteConfirm, validationConfig.saveButton);
 
 let userId;
 
@@ -45,7 +46,7 @@ Promise.all([api.getProfileInformation(), api.getInitialCards()])
   .then(([res, data]) => {
     userInfo.setUserInfo(res);
     userId = res._id;
-    postsSection.renderItems(data);
+    postsSection.renderItems(data.reverse());
   })
   .catch(console.log);
 
@@ -67,26 +68,30 @@ function createPost(data) {
         .catch(console.log);
     }
   });
-  function handleDeleteConfirm(id) {
-    confirmationPopup.renderLoadingChanges(true);
-    api
-      .deletePost(id)
-      .then((res) => {
-        confirmationPopup.close();
-        post.deletePost();
-      })
-      .catch((err) => {
-        console.log(`Ошибка... ${err}`);
-      })
-      .finally(() => {
-        confirmationPopup.renderLoadingChanges(false);
-      });
-  }
-  const confirmationPopup = new PopupWithConfirmation(popupWithConfirmDelPost, handleDeleteConfirm, validationConfig.saveButton);
-  function handleOpenConfirmDeletePopup(id) {
-    confirmationPopup.open(id);
-  }
   return post.generatePost();
+}
+
+function handleOpenConfirmDeletePopup(id) {
+  confirmationPopup.open(id);
+}
+
+function handleDeleteConfirm(id) {
+  confirmationPopup.renderLoadingChanges(true);
+  api
+    .deletePost(id)
+    .then((res) => {
+      confirmationPopup.close();
+      const post = document.getElementById(id);
+      if (post) {
+        post.remove();
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка... ${err}`);
+    })
+    .finally(() => {
+      confirmationPopup.renderLoadingChanges(false);
+    });
 }
 
 function handlePostFormSubmit(data) {

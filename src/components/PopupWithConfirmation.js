@@ -10,7 +10,7 @@ export default class PopupWithConfirmation extends Popup {
 
   renderLoadingChanges(isLoading) {
     if (isLoading) {
-      this._buttonSave.textContent = "Сохранение...";
+      this._buttonSave.textContent = "Удаление...";
     } else {
       this._buttonSave.textContent = this._defaultTextInButton;
     }
@@ -23,11 +23,13 @@ export default class PopupWithConfirmation extends Popup {
   open(id) {
     super.open();
     this._id = id;
-    this._buttonSave.addEventListener("mousedown", this._handleConfirm.bind(this));
+    this._setEventListeners();
   }
 
   close() {
     super.close();
-    this._buttonSave.removeEventListener("mousedown", this._handleConfirm.bind(this));
+  }
+  _setEventListeners() {
+    this._buttonSave.addEventListener("mousedown", this._handleConfirm.bind(this));
   }
 }
