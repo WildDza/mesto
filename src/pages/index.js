@@ -46,8 +46,7 @@ Promise.all([api.getProfileInformation(), api.getInitialCards()])
   .then(([res, data]) => {
     userInfo.setUserInfo(res);
     userId = res._id;
-    // postsSection.renderItems(data.reverse());
-    postsSection.renderItems(data);
+    postsSection.renderItems(data.reverse());
   })
   .catch(console.log);
 
