@@ -36,9 +36,9 @@ const popupOpenImage = new PopupWithImage(popupImage);
 const popupWithFormAddPost = new PopupWithForm(popupAddPost, handlePostFormSubmit);
 const popupWithFormEdit = new PopupWithForm(popupEdit, handleProfileFormSubmit);
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
+const confirmationPopup = new PopupWithConfirmation(popupWithConfirmDelPost, handleDeleteConfirm, validationConfig.saveButton);
 const userInfo = new UserInfo(titleProfile, subtitleProfile, avatar);
 const postsSection = new Section({ renderer: createPost }, containerPosts);
-const confirmationPopup = new PopupWithConfirmation(popupWithConfirmDelPost, handleDeleteConfirm, validationConfig.saveButton);
 
 let userId;
 
@@ -51,40 +51,41 @@ Promise.all([api.getProfileInformation(), api.getInitialCards()])
   .catch(console.log);
 
 function createPost(data) {
-  const post = new Card(data, postSelectors, handleOpenPopup, handleOpenConfirmDeletePopup, handleDeleteConfirm, userId, (id) => {
-    if (post.isLiked()) {
-      api
-        .deleteLike(id)
-        .then((res) => {
-          post.setLikes(res.likes);
-        })
-        .catch(console.log);
-    } else {
-      api
-        .addLike(id)
-        .then((res) => {
-          post.setLikes(res.likes);
-        })
-        .catch(console.log);
-    }
-  });
+  const post = new Card(data, postSelectors, handleOpenPopup, handleOpenConfirmDeletePopup, userId, handleLikeClick);
   return post.generatePost();
+}
+
+function handleLikeClick(data) {
+  const postId = data.getPostId();
+  if (data.isLiked()) {
+    api
+      .deleteLike(postId)
+      .then((res) => {
+        data.setLikes(res.likes);
+      })
+      .catch(console.log);
+  } else {
+    api
+      .addLike(postId)
+      .then((res) => {
+        data.setLikes(res.likes);
+      })
+      .catch(console.log);
+  }
 }
 
 function handleOpenConfirmDeletePopup(id) {
   confirmationPopup.open(id);
 }
 
-function handleDeleteConfirm(id) {
+function handleDeleteConfirm(data) {
+  const postId = data.getPostId();
   confirmationPopup.renderLoadingChanges(true);
   api
-    .deletePost(id)
+    .deletePost(postId)
     .then((res) => {
       confirmationPopup.close();
-      const post = document.getElementById(id);
-      if (post) {
-        post.remove();
-      }
+      data.deletePost();
     })
     .catch((err) => {
       console.log(`Ошибка... ${err}`);
@@ -163,6 +164,12 @@ iconPostAdd.addEventListener("click", function () {
   popupWithFormAddPost.open();
   formValidatorAddPost.toggleButtonState();
 });
+
+popupWithFormAvatar.setEventListeners();
+popupWithFormEdit.setEventListeners();
+popupWithFormAddPost.setEventListeners();
+popupOpenImage.setEventListeners();
+confirmationPopup.setEventListeners();
 
 formValidatorEditInfo.enableValidation();
 formValidatorAddPost.enableValidation();
